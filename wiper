@@ -1,0 +1,26 @@
+	mov bh,0
+start:
+	inc bh
+	mov bl,42h
+	test bh,01
+	jnz odd
+even:
+	mov di,3000
+	jmp after
+odd:
+	mov di,3004
+after:
+	mov cl,04
+	mov ch,00
+looper:
+	mov al,[di]
+	out c0,al
+	dec bl
+	jz next
+	call delay
+	loop looper
+	sub di,04
+	jmp after
+next:
+	jmp start
+
